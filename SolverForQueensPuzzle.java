@@ -58,21 +58,19 @@ public class SolverForQueensPuzzle {
      */
     private void recordSolutionsStarted() {
 
-        // Which has been requested, a base case or recursive case?
-            // your code here
-            // action(s) for base case(s)
-            System.out.println( "  for debugging: base case detected for..."
-                              + System.lineSeparator()
-                              + inProgress
-                              );
+        nBoardsConsidered++;
+        if (inProgress.accept()) {
+            BoardForQueensPuzzle nextCopy = new BoardForQueensPuzzle(inProgress);
+            solutions.add(newCopy);
+        }
+        for (int currentFile = 0; currentFile < inProgress.ranks(); currentFile++) {
+            inProgress.populate(currentFile);
+            recordSolutionsStarted();
+            inProgress.depopulate();
+        }
 
-            // action for recursive cases
-            // your code here
-            System.out.println( "  for debugging: recursive case detected for..."
-                              + System.lineSeparator()
-                              + inProgress
-                              );
-    }
+
+        }
 
 
     // --------- skeletal code below here needs no modification ---------
